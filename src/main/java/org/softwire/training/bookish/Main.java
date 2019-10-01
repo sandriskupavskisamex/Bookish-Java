@@ -1,9 +1,11 @@
 package org.softwire.training.bookish;
 
 import org.jdbi.v3.core.Jdbi;
+import org.softwire.training.bookish.models.database.Book;
 
 import javax.swing.plaf.nimbus.State;
 import java.sql.*;
+import java.util.List;
 
 
 public class Main {
@@ -32,10 +34,11 @@ public class Main {
         Statement statement = null;
 
         try {
+
             statement = connection.createStatement();
 
             String query = "select title " +
-                    "from " + database + ".books ORDER BY title;";
+                    "from " + database + ".books ORDER BY title";
 
             ResultSet rs = statement.executeQuery(query);
 
@@ -43,7 +46,6 @@ public class Main {
                 String title = rs.getString("title");
                 System.out.println(title);
             }
-
 
         } catch (SQLException e) {
             System.out.println(e);
@@ -57,15 +59,22 @@ public class Main {
     }
 
     private static void jdbiMethod(String connectionString) {
-        System.out.println("\nJDBI method...");
 
         // TODO: print out the details of all the books (using JDBI)
         // See this page for details: http://jdbi.org
         // Use the "Book" class that we've created for you (in the models.database folder)
 
-        Jdbi jdbi = Jdbi.create(connectionString);
+        Jdbi jdbi = Jdbi.create(connectionString);; // (H2 in-memory database)
 
+        // THIS DOES NOT WORK
 
+        List<Book> books = jdbi.withHandle(handle -> {
+            return handle.createQuery("SELECT title FROM library.books;")
+                    .mapToBean(Book.class)
+                    .list();
+        });
+
+        System.out.println("THE BOOK IS: " + books.get(0).getTitle());
 
     }
 }
