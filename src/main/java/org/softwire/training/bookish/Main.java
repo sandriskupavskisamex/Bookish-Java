@@ -66,7 +66,7 @@ public class Main {
 
         Jdbi jdbi = Jdbi.create(connectionString);; // (H2 in-memory database)
 
-        // THIS DOES NOT WORK
+        // THIS DOES NOT WORK. NEEDS SETTER.
 
         List<Book> books = jdbi.withHandle(handle -> {
             return handle.createQuery("SELECT title FROM library.books;")
