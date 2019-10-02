@@ -5,6 +5,7 @@ import org.softwire.training.bookish.models.database.Book;
 
 import javax.swing.plaf.nimbus.State;
 import java.sql.*;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -14,8 +15,8 @@ public class Main {
         String hostname = "localhost";
         String database = "library";
         String user = "root";
-        String password = "passwordsql";
-        String connectionString = "jdbc:mysql://" + hostname + "/" + database + "?user=" + user + "&password=" + password + "&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT&useSSL=false";
+        String password = "1258LUki";
+        String connectionString = "jdbc:mysql://" + hostname + "/" + database + "?user=" + user + "&password=" + password + "&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT&useSSL=false&allowPublicKeyRetrieval=true";
 
         jdbcMethod(connectionString);
         jdbiMethod(connectionString);
@@ -74,7 +75,10 @@ public class Main {
                     .list();
         });
 
-        System.out.println("THE BOOK IS: " + books.get(0).getTitle());
+        books.stream().sorted(
+                Comparator.comparing(Book::getTitle)
+        ).forEach(book -> System.out.println("The title is " + book.getTitle()));
+
 
     }
 }
