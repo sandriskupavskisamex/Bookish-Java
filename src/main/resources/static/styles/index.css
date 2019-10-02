@@ -22,3 +22,32 @@
     margin: 15px 0 0 0;
 }
 
+.container {
+    padding-bottom: -100px;
+}
+
+#bookofweek {
+    text-align: center;
+}
+
+.main {
+    text-align: center;
+    margin-top: -300px;
+    margin-bottom: 75px;
+}
+
+.main img {
+    width: 10%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.main p {
+    width: 50%;
+    text-align: center;
+    margin: 0 auto;
+    font-size: 20px;
+}
+

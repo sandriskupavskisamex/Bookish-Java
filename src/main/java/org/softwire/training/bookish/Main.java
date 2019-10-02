@@ -15,7 +15,7 @@ public class Main {
         String hostname = "localhost";
         String database = "library";
         String user = "root";
-        String password = "1258LUki";
+        String password = "passwordsql";
         String connectionString = "jdbc:mysql://" + hostname + "/" + database + "?user=" + user + "&password=" + password + "&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT&useSSL=false&allowPublicKeyRetrieval=true";
 
         jdbcMethod(connectionString);
@@ -66,8 +66,6 @@ public class Main {
         // Use the "Book" class that we've created for you (in the models.database folder)
 
         Jdbi jdbi = Jdbi.create(connectionString);; // (H2 in-memory database)
-
-        // THIS DOES NOT WORK. NEEDS SETTER.
 
         List<Book> books = jdbi.withHandle(handle -> {
             return handle.createQuery("SELECT title FROM library.books;")
