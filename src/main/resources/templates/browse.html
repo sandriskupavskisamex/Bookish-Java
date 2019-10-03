@@ -40,6 +40,46 @@
                 </tr>
 
             </table>
+
+            <div>
+                <h2>Add a book:</h2>
+                <form th:action="@{/browse/add-book}" method="post">
+                    <div class="add-book-row">
+                        <label>
+                            <span>Title: </span>
+                            <input type="text" name="title">
+                        </label>
+                    </div>
+                    <div class="add-book-row">
+                        <label>
+                            <span>Author: </span>
+                            <input type="text" name="author">
+                        </label>
+                    </div>
+                    <div class="add-book-row">
+                        <label>
+                            <span>Author: </span>
+                            <input type="text" name="author">
+                        </label>
+                    </div>
+                    <div class="add-book-row">
+                        <label>
+                            <span>ISBN: </span>
+                            <input type="text" name="isbn">
+                        </label>
+                    </div>
+                    <div class="add-book-row">
+                        <label>
+                            <span>Release Date: </span>
+                            <input type="text" name="isbn">
+                        </label>
+                    </div>
+                    <div class="add-book-row">
+                        <span><!-- spacer --></span>
+                        <input type="submit" value="Add book" />
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
