@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/styles/general.css"/>
     <link rel="stylesheet" href="/styles/navbar.css"/>
     <link rel="stylesheet" href="/styles/index.css"/>
+    <link rel="stylesheet" href="/styles/browse.css"/>
 </head>
 
 <body>
@@ -22,7 +23,12 @@
     <div layout:fragment="content" class="container body-content">
         <h2>Book Information</h2>
         <div>
-
+            <label>Use the search field to find books</label>
+            <br>
+            <form th:action="@{/browse/search}" method="post">
+                <input  id="searchbar" type="search" name="searchbar" placeholder="Search...">
+                <input type="submit" value="showSearchedBooks">
+            </form>
             <table>
 
                 <tr class="column-header">
@@ -30,14 +36,17 @@
                     <td><b>Author</b></td>
                     <td><b>Release Date</b></td>
                     <td><b>ISBN</b></td>
+                    <td><b></b></td>
                 </tr>
 
-                <tr th:each ="prod : ${model.getBooks()}">
-                    <td th:text ="${prod.getTitle()}"></td>
-                    <td th:text ="${prod.getAuthor()}"></td>
-                    <td th:text ="${prod.getRelease_date()}"></td>
-                    <td th:text ="${prod.getIsbn()}"></td>
+                <tr th:each ="book : ${model.getBooks()}">
+                    <td th:text ="${book.getTitle()}"></td>
+                    <td th:text ="${book.getAuthor()}"></td>
+                    <td th:text ="${book.getRelease_date()}"></td>
+                    <td th:text ="${book.getIsbn()}"></td>
+                    <td><a style="background-color: yellow; border-radius: 100px;" type="submit" th:href="${'/browse/delete-book?isbn=' + book.getIsbn()}" class="delete-button">DELETE THE DAMN BOOK</a></td>
                 </tr>
+
 
             </table>
 
@@ -58,12 +67,6 @@
                     </div>
                     <div class="add-book-row">
                         <label>
-                            <span>Author: </span>
-                            <input type="text" name="author">
-                        </label>
-                    </div>
-                    <div class="add-book-row">
-                        <label>
                             <span>ISBN: </span>
                             <input type="text" name="isbn">
                         </label>
@@ -71,7 +74,7 @@
                     <div class="add-book-row">
                         <label>
                             <span>Release Date: </span>
-                            <input type="text" name="isbn">
+                            <input type="date" name="release_date">
                         </label>
                     </div>
                     <div class="add-book-row">

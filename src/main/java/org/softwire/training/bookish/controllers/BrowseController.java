@@ -40,20 +40,30 @@ public class BrowseController {
         return new ModelAndView("browse", "model", browsePageModel);
     }
 
+    @RequestMapping("/search")
+    ModelAndView searchbooks(@RequestParam("searchbar") String searchbar) {
+
+        List<Book> books = booksService.searchBooks(searchbar);
+        BrowsePageModel browsePageModel = new BrowsePageModel();
+        browsePageModel.setBooks(books);
+
+        return new ModelAndView("browse", "model", browsePageModel);
+    }
+
     @RequestMapping("/add-book")
     RedirectView addTechnology(@ModelAttribute Book book) {
 
         booksService.addBook(book);
 
-        return new RedirectView("/edit-book");
+        return new RedirectView("/browse");
     }
 
     @RequestMapping("/delete-book")
-    RedirectView deleteBook(@RequestParam int bookId) {
+    RedirectView deleteBook(@RequestParam String isbn) {
 
-        booksService.deleteBook(bookId);
+        booksService.deleteBook(isbn);
 
-        return new RedirectView("/edit-book");
+        return new RedirectView("/browse");
 
     }
 
@@ -62,7 +72,7 @@ public class BrowseController {
 
         booksService.editBook(bookId);
 
-        return new RedirectView("/edit-book");
+        return new RedirectView("/browse");
     }
 
 }
